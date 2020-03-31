@@ -11,7 +11,7 @@ const roomRouter = require('./roomRouter');
 const messageRouter = require('./messageRouter');
 const friendshipRouter = require('./friendshipRouter');
 
-const router = new Router({prefix: '/api'});
+const router = new Router();
 
 /**
  * register router
@@ -19,6 +19,8 @@ const router = new Router({prefix: '/api'});
  * @param puppet
  */
 module.exports = async (app, puppet) => {
+
+  router.prefix(puppet.prefix || '/mock');
 
   // root router
   await rootRouter(router, puppet);

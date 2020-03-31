@@ -10,13 +10,15 @@ const router = require('./router/router');
 
 class PuppetKoa extends PuppetMock {
   /**
-   * @param options = {id,qrcode,status,data,...}
+   * @param options = {id,qrcode,status,data,port,prefix,...}
    */
   constructor(options) {
-    const {id, qrcode, status, data} = options;
+    const {id, qrcode, status, data, port, prefix} = options;
     super(options);
     this.id = id;
+    this.port = port;
     this.data = data;
+    this.prefix = prefix;
     this.qrcode = qrcode;
     this.status = status;
   }
@@ -34,6 +36,10 @@ class PuppetKoa extends PuppetMock {
     app.use(bodyParser());
 
     await router(app, this);
+
+    app.listen(this.port || 3000, () => {
+      console.log(`PuppetKoa listen http://0.0.0.0:${this.port}`);
+    })
   }
 }
 
