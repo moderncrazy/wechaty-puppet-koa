@@ -1,7 +1,7 @@
 {
-  "name": "wechaty-puppet-koa",
+  "name": "wechaty-puppet-mock-koa",
   "version": "0.0.1",
-  "description": "packaging with koa based on wechaty-puppet-mock",
+  "description": "It is convenient to test wechaty with restful interface",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
