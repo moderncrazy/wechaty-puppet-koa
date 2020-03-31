@@ -1,6 +1,6 @@
 {
   "name": "wechaty-puppet-mock-koa",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "It is convenient to test wechaty with restful interface",
   "main": "src/index.js",
   "scripts": {
@@ -23,5 +23,9 @@
     "puppet",
     "mock",
     "koa"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moderncrazy/wechaty-puppet-mock-koa.git"
+  }
 }

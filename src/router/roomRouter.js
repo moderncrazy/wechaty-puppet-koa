@@ -43,7 +43,7 @@ module.exports = async (router, puppet) => {
     const {timestamp, ...data} = request.body;
     // set content
     puppet.cacheRoomPayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
-    puppet.emit('room-join', data.id);
+    puppet.emit('room-join', data.id, data.inviteeIdList, data.inviterId, timestamp || Date.now());
     // response
     util.result(ctx, 200);
   });
@@ -68,7 +68,7 @@ module.exports = async (router, puppet) => {
     const {timestamp, ...data} = request.body;
     // set content
     puppet.cacheRoomPayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
-    puppet.emit('room-leave', data.id);
+    puppet.emit('room-leave', data.id, data.leaverIdList, data.removerId, timestamp || Date.now());
     // response
     util.result(ctx, 200);
   });
@@ -94,7 +94,7 @@ module.exports = async (router, puppet) => {
     const {timestamp, ...data} = request.body;
     // set content
     puppet.cacheRoomPayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
-    puppet.emit('room-topic', data.id);
+    puppet.emit('room-topic', data.id, data.newTopic, data.oldTopic, data.changerId, timestamp || Date.now());
     // response
     util.result(ctx, 200);
   });
