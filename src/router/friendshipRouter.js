@@ -22,8 +22,8 @@ module.exports = async (router, puppet) => {
   router.post('/friendship/confirm', parameterValidate({
     id: {type: 'string'},
     contactId: {type: 'string'},
-    hello: {type: 'string', require: false},
-    timestamp: {type: 'number', require: false},
+    hello: {type: 'string', required: false},
+    timestamp: {type: 'number', required: false},
   }));
   router.post('/friendship/confirm', (ctx) => {
     const {request} = ctx;
@@ -45,10 +45,10 @@ module.exports = async (router, puppet) => {
     id: {type: 'string'},
     ticket: {type: 'string'},
     contactId: {type: 'string'},
-    hello: {type: 'string', require: false},
-    stranger: {type: 'string', require: false},
-    timestamp: {type: 'number', require: false},
-    scene: {type: 'enum', values: [1, 2, 3, 12, 14, 15, 17, 18, 25, 29, 30], require: false},
+    hello: {type: 'string', required: false},
+    stranger: {type: 'string', required: false},
+    timestamp: {type: 'number', required: false},
+    scene: {type: 'enum', values: [1, 2, 3, 12, 14, 15, 17, 18, 25, 29, 30], required: false},
   }));
   router.post('/friendship/confirm', (ctx) => {
     const {request} = ctx;
@@ -69,8 +69,8 @@ module.exports = async (router, puppet) => {
   router.post('/friendship/verify', parameterValidate({
     id: {type: 'string'},
     contactId: {type: 'string'},
-    hello: {type: 'string', require: false},
-    timestamp: {type: 'number', require: false},
+    hello: {type: 'string', required: false},
+    timestamp: {type: 'number', required: false},
   }));
   router.post('/friendship/confirm', (ctx) => {
     const {request} = ctx;
@@ -91,8 +91,8 @@ module.exports = async (router, puppet) => {
   router.post('/friendship/unknown', parameterValidate({
     id: {type: 'string'},
     contactId: {type: 'string'},
-    hello: {type: 'string', require: false},
-    timestamp: {type: 'number', require: false},
+    hello: {type: 'string', required: false},
+    timestamp: {type: 'number', required: false},
   }));
   router.post('/friendship/confirm', (ctx) => {
     const {request} = ctx;

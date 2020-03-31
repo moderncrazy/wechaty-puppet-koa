@@ -19,8 +19,8 @@ module.exports = async (router, puppet) => {
     id: {type: 'string'},
     name: {type: 'string'},
     avatar: {type: 'string'},
-    roomAlias: {type: 'string', require: false},
-    inviterId: {type: 'string', require: false}
+    roomAlias: {type: 'string', required: false},
+    inviterId: {type: 'string', required: false}
   };
 
   /**
@@ -33,9 +33,9 @@ module.exports = async (router, puppet) => {
     adminIdList: {type: 'array', itemType: 'string'},
     inviteeIdList: {type: 'array', itemType: 'string'},
     memberList: {type: 'array', itemType: 'object', rule: ROOM_MEMBER_RULE},
-    avatar: {type: 'string', require: false},
-    ownerId: {type: 'string', require: false},
-    timestamp: {type: 'number', require: false}
+    avatar: {type: 'string', required: false},
+    ownerId: {type: 'string', required: false},
+    timestamp: {type: 'number', required: false}
   }));
   router.post('/room/join', handleMemberList(puppet));
   router.post('/room/join', (ctx) => {
@@ -58,9 +58,9 @@ module.exports = async (router, puppet) => {
     adminIdList: {type: 'array', itemType: 'string'},
     leaverIdList: {type: 'array', itemType: 'string'},
     memberList: {type: 'array', itemType: 'object', rule: ROOM_MEMBER_RULE},
-    avatar: {type: 'string', require: false},
-    ownerId: {type: 'string', require: false},
-    timestamp: {type: 'number', require: false}
+    avatar: {type: 'string', required: false},
+    ownerId: {type: 'string', required: false},
+    timestamp: {type: 'number', required: false}
   }));
   router.post('/room/leave', handleMemberList(puppet));
   router.post('/room/leave', (ctx) => {
@@ -84,9 +84,9 @@ module.exports = async (router, puppet) => {
     changerId: {type: 'string'},
     adminIdList: {type: 'array', itemType: 'string'},
     memberIdList: {type: 'array', itemType: 'object', rule: ROOM_MEMBER_RULE},
-    avatar: {type: 'string', require: false},
-    ownerId: {type: 'string', require: false},
-    timestamp: {type: 'number', require: false}
+    avatar: {type: 'string', required: false},
+    ownerId: {type: 'string', required: false},
+    timestamp: {type: 'number', required: false}
   }));
   router.post('/room/topic', handleMemberList(puppet));
   router.post('/room/topic', (ctx) => {
@@ -111,7 +111,7 @@ module.exports = async (router, puppet) => {
     receiverId: {type: 'string'},
     memberCount: {type: 'number'},
     memberIdList: {type: 'array', itemType: 'object', rule: ROOM_MEMBER_RULE},
-    timestamp: {type: 'number', require: false}
+    timestamp: {type: 'number', required: false}
   }));
   router.post('/room/invite', handleMemberList(puppet));
   router.post('/room/invite', (ctx) => {

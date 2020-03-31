@@ -22,17 +22,17 @@ module.exports = async (router, puppet) => {
     roomId: {type: 'string'},
     mentionIdList: {type: 'array', itemType: 'string'},
     type: {type: 'enum', values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]},
-    text: {type: 'string', require: false},
-    toId: {type: 'string', require: false},
-    fromId: {type: 'string', require: false},
-    filename: {type: 'string', require: false},
-    timestamp: {type: 'number', require: false},
+    text: {type: 'string', required: false},
+    toId: {type: 'string', required: false},
+    fromId: {type: 'string', required: false},
+    filename: {type: 'string', required: false},
+    timestamp: {type: 'number', required: false},
   }));
   router.post('/message/room', (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
-    puppet.cacheContactPayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
+    puppet.cacheMessagePayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
     puppet.emit('message', data.id);
     // response
     util.result(ctx, 200);
@@ -47,16 +47,16 @@ module.exports = async (router, puppet) => {
     fromId: {type: 'string'},
     mentionIdList: {type: 'array', itemType: 'string'},
     type: {type: 'enum', values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]},
-    text: {type: 'string', require: false},
-    roomId: {type: 'string', require: false},
-    filename: {type: 'string', require: false},
-    timestamp: {type: 'number', require: false},
+    text: {type: 'string', required: false},
+    roomId: {type: 'string', required: false},
+    filename: {type: 'string', required: false},
+    timestamp: {type: 'number', required: false},
   }));
   router.post('/message/single', (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
-    puppet.cacheContactPayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
+    puppet.cacheMessagePayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
     puppet.emit('message', data.id);
     // response
     util.result(ctx, 200);

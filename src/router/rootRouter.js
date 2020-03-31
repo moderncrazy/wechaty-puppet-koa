@@ -23,13 +23,13 @@ module.exports = async (router, puppet) => {
     avatar: {type: 'string'},
     type: {type: 'enum', values: [0, 1, 2]},
     gender: {type: 'enum', values: [0, 1, 2]},
-    city: {type: 'string', require: false},
-    alias: {type: 'string', require: false},
-    star: {type: 'boolean', require: false},
-    weixin: {type: 'string', require: false},
-    friend: {type: 'boolean', require: false},
-    address: {type: 'string', require: false},
-    province: {type: 'string', require: false},
+    city: {type: 'string', required: false},
+    alias: {type: 'string', required: false},
+    star: {type: 'boolean', required: false},
+    weixin: {type: 'string', required: false},
+    friend: {type: 'boolean', required: false},
+    address: {type: 'string', required: false},
+    province: {type: 'string', required: false},
   }));
   router.post('/login', (ctx) => {
     const {request} = ctx;
@@ -50,13 +50,13 @@ module.exports = async (router, puppet) => {
     reason: {type: 'string'},
     type: {type: 'enum', values: [0, 1, 2]},
     gender: {type: 'enum', values: [0, 1, 2]},
-    city: {type: 'string', require: false},
-    alias: {type: 'string', require: false},
-    star: {type: 'boolean', require: false},
-    weixin: {type: 'string', require: false},
-    friend: {type: 'boolean', require: false},
-    address: {type: 'string', require: false},
-    province: {type: 'string', require: false},
+    city: {type: 'string', required: false},
+    alias: {type: 'string', required: false},
+    star: {type: 'boolean', required: false},
+    weixin: {type: 'string', required: false},
+    friend: {type: 'boolean', required: false},
+    address: {type: 'string', required: false},
+    province: {type: 'string', required: false},
   }));
   router.post('/logout', (ctx) => {
     const {request} = ctx;
