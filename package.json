@@ -1,0 +1,22 @@
+{
+  "name": "wechaty-puppet-koa",
+  "version": "0.0.1",
+  "description": "packaging with koa based on wechaty-puppet-mock",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "moderncrazy",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@koa/router": "^8.0.8",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.3.0",
+    "parameter": "^3.6.0",
+    "wechaty-puppet": "^0.20.2",
+    "wechaty-puppet-mock": "^0.16.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
