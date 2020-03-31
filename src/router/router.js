@@ -20,7 +20,7 @@ const router = new Router();
  */
 module.exports = async (app, puppet) => {
 
-  router.prefix(puppet.prefix || '/mock');
+  router.prefix(puppet.prefix);
 
   // root router
   await rootRouter(router, puppet);
