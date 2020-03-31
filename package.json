@@ -4,7 +4,6 @@
   "description": "It is convenient to test wechaty with restful interface",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "moderncrazy",
   "license": "Apache-2.0",
@@ -18,5 +17,11 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0"
-  }
+  },
+  "keywords": [
+    "wechaty",
+    "puppet",
+    "mock",
+    "koa"
+  ]
 }

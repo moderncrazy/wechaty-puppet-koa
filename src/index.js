@@ -25,9 +25,9 @@ class PuppetKoa extends PuppetMock {
     this.state.on('pending');
     this.state.on(true);
 
-    this.emit('scan', this.qrcode || 'https://not-exist.com', this.status || 0);
+    this.emit('scan', this.qrcode || 'https://not-exist.com', this.status || 0, this.data || null);
 
-    this.emit('login', this.id);
+    this.emit('login', this.id || 'login_user_id');
 
     const app = new Koa();
 
