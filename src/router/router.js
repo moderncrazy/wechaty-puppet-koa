@@ -11,8 +11,6 @@ const roomRouter = require('./roomRouter');
 const messageRouter = require('./messageRouter');
 const friendshipRouter = require('./friendshipRouter');
 
-const router = new Router();
-
 /**
  * register router
  * @param app
@@ -20,7 +18,7 @@ const router = new Router();
  */
 module.exports = async (app, puppet) => {
 
-  router.prefix(puppet.prefix);
+  const router = new Router({prefix: puppet.prefix});
 
   // root router
   await rootRouter(router, puppet);
