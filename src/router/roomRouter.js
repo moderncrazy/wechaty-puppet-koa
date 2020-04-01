@@ -105,6 +105,25 @@ module.exports = async (router, puppet) => {
   });
 
   /**
+   * query room member
+   */
+  router.get('/room/member', parameterValidate({
+    id: {type: 'string', required: false},
+  }));
+  router.get('/room/member', async (ctx) => {
+    const {request} = ctx;
+    let result = [];
+    // query room member
+    if (request.query.id) {
+      result = await puppet.cacheRoomMemberPayload.get(request.body.id);
+    } else {
+      for (let item of await puppet.cacheRoomMemberPayload.values()) result.push(item);
+    }
+    // response
+    resultUtil.result(ctx, 200, result);
+  });
+
+  /**
    * join room
    */
   router.post('/room/join', parameterValidate({
