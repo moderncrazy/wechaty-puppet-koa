@@ -61,12 +61,12 @@ module.exports = async (router, puppet) => {
   }));
   router.get('/contact', async (ctx) => {
     const {request} = ctx;
-    let result = null;
+    let result = [];
     // get content
     if (request.query.id) {
       result = await puppet.cacheContactPayload.get(request.query.id);
     } else {
-      result = await puppet.cacheContactPayload.values();
+      for (let item of await puppet.cacheContactPayload.values()) result.push(item);
     }
     // response
     resultUtil.result(ctx, 200, result);

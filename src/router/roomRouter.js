@@ -60,8 +60,7 @@ module.exports = async (router, puppet) => {
     // delete cacheRoomPayload
     await puppet.cacheRoomPayload.delete(request.body.id);
     // delete cacheRoomMemberPayload
-    let keys = await puppet.cacheRoomMemberPayload.keys();
-    for (const key of keys) {
+    for (const key of await puppet.cacheRoomMemberPayload.keys()) {
       if (key.indexOf(request.body.id) == 0) {
         await puppet.cacheRoomMemberPayload.delete(key)
       }
@@ -94,14 +93,14 @@ module.exports = async (router, puppet) => {
   }));
   router.get('/room', async (ctx) => {
     const {request} = ctx;
-    let result = null;
+    let result = [];
     // query room
     if (request.query.id) {
       result = await puppet.cacheRoomPayload.get(request.body.id);
       result.memberList = result.memberIdList.map(async (memberId) => await puppet.cacheRoomMemberPayload.get(memberId));
       delete result.memberIdList;
     } else {
-      result = await puppet.cacheRoomPayload.values();
+      for (let item of await puppet.cacheRoomPayload.values()) result.push(item);
       result = result.map(async (room) => {
         room.memberList = room.memberIdList.map(async (memberId) => await puppet.cacheRoomMemberPayload.get(memberId));
         delete room.memberIdList;
