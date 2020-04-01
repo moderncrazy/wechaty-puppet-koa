@@ -6,7 +6,7 @@
 
 const Parameter = require('parameter');
 
-const util = require('../util/util');
+const resultUtil = require('../util/resultUtil');
 
 const parameter = new Parameter({validateRoot: true});
 
@@ -22,7 +22,7 @@ module.exports = (rule) => {
     if (!err) {
       return await next();
     } else {
-      return util.result(ctx, 400, {field: err[0].field, message: err[0].message});
+      return resultUtil.result(ctx, 400, {field: err[0].field, message: err[0].message});
     }
   }
 };

@@ -7,30 +7,37 @@ const bodyParser = require('koa-bodyparser');
 const {PuppetMock} = require('wechaty-puppet-mock');
 
 const router = require('./router/router');
+const initUtil = require('./util/initUtil');
 const notFound = require('./middleware/notFound');
 
 class PuppetKoa extends PuppetMock {
   /**
-   * @param options = {id,qrcode,status,data,port,prefix,...}
+   * initFile is json file
+   * loginData not required if initFile exists
+   * @param options = {port,prefix,?loginData,?initFile,...}
    */
   constructor(options) {
-    const {id, qrcode, status, data, port, prefix} = options;
+    const {port, prefix, loginData, initFile} = options;
     super(options);
-    this.id = id || 'login_user_id';
+    this.initFile = initFile;
     this.port = port || 3000;
-    this.data = data || null;
     this.prefix = prefix || '/mock';
-    this.qrcode = qrcode || 'https://not-exist.com';
-    this.status = status || 0;
+    this.loginData = loginData || {id: 'bot_id', status: 0, qrcode: 'https://not-exist.com'};
   }
 
   async start() {
     this.state.on('pending');
     this.state.on(true);
 
-    this.emit('scan', this.qrcode, this.status, this.data);
+    // import init file
+    if (this.initFile) {
+      let data = await initUtil.importInitFile(this.initFile, this);
+      this.loginData = Object.assign(this.loginData, data.login);
+    }
 
-    this.emit('login', this.id);
+    this.emit('scan', this.loginData.qrcode, this.loginData.status, this.loginData.data);
+
+    this.emit('login', this.loginData.id);
 
     const app = new Koa();
 

@@ -6,7 +6,7 @@
 
 const {FriendshipType} = require('wechaty-puppet');
 
-const util = require('../util/util');
+const resultUtil = require('../util/resultUtil');
 const parameterValidate = require('../middleware/parameterValidate');
 
 /**
@@ -25,17 +25,17 @@ module.exports = async (router, puppet) => {
     hello: {type: 'string', required: false},
     timestamp: {type: 'number', required: false},
   }));
-  router.post('/friendship/confirm', (ctx) => {
+  router.post('/friendship/confirm', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
-    puppet.cacheFriendshipPayload.set(data.id, Object.assign({
+    await puppet.cacheFriendshipPayload.set(data.id, Object.assign({
       timestamp: timestamp || Date.now(),
       type: FriendshipType.Confirm
     }, data));
     puppet.emit('friendship', data.id);
     // response
-    util.result(ctx, 200);
+    resultUtil.result(ctx, 200);
   });
 
   /**
@@ -50,17 +50,17 @@ module.exports = async (router, puppet) => {
     timestamp: {type: 'number', required: false},
     scene: {type: 'enum', values: [1, 2, 3, 12, 14, 15, 17, 18, 25, 29, 30], required: false},
   }));
-  router.post('/friendship/confirm', (ctx) => {
+  router.post('/friendship/receive', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
-    puppet.cacheFriendshipPayload.set(data.id, Object.assign({
+    await puppet.cacheFriendshipPayload.set(data.id, Object.assign({
       timestamp: timestamp || Date.now(),
       type: FriendshipType.Receive
     }, data));
     puppet.emit('friendship', data.id);
     // response
-    util.result(ctx, 200);
+    resultUtil.result(ctx, 200);
   });
 
   /**
@@ -72,17 +72,17 @@ module.exports = async (router, puppet) => {
     hello: {type: 'string', required: false},
     timestamp: {type: 'number', required: false},
   }));
-  router.post('/friendship/confirm', (ctx) => {
+  router.post('/friendship/verify', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
-    puppet.cacheFriendshipPayload.set(data.id, Object.assign({
+    await puppet.cacheFriendshipPayload.set(data.id, Object.assign({
       timestamp: timestamp || Date.now(),
       type: FriendshipType.Verify
     }, data));
     puppet.emit('friendship', data.id);
     // response
-    util.result(ctx, 200);
+    resultUtil.result(ctx, 200);
   });
 
   /**
@@ -94,16 +94,16 @@ module.exports = async (router, puppet) => {
     hello: {type: 'string', required: false},
     timestamp: {type: 'number', required: false},
   }));
-  router.post('/friendship/confirm', (ctx) => {
+  router.post('/friendship/unknown', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
-    puppet.cacheFriendshipPayload.set(data.id, Object.assign({
+    await puppet.cacheFriendshipPayload.set(data.id, Object.assign({
       timestamp: timestamp || Date.now(),
       type: FriendshipType.Unknown
     }, data));
     puppet.emit('friendship', data.id);
     // response
-    util.result(ctx, 200);
+    resultUtil.result(ctx, 200);
   });
 };

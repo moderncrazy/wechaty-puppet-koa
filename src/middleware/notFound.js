@@ -4,13 +4,13 @@
  * not found
  */
 
-const util = require('../util/util');
+const resultUtil = require('../util/resultUtil');
 
 module.exports = () => {
   return async (ctx, next) => {
     await next();
     if (ctx.status == 404 || !ctx.body) {
-      util.result(ctx, 404);
+      resultUtil.result(ctx, 404);
     }
   }
 };
