@@ -9,6 +9,7 @@ const Router = require('@koa/router');
 const rootRouter = require('./rootRouter');
 const roomRouter = require('./roomRouter');
 const messageRouter = require('./messageRouter');
+const contactRouter = require('./contactRouter');
 const friendshipRouter = require('./friendshipRouter');
 
 /**
@@ -25,6 +26,9 @@ module.exports = async (app, puppet) => {
 
   // room router
   await roomRouter(router, puppet);
+
+  // contact router
+  await contactRouter(router, puppet);
 
   // message router
   await messageRouter(router, puppet);
