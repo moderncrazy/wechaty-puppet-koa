@@ -23,29 +23,32 @@ module.exports = async (router, puppet) => {
     id: {type: 'string'},
     topic: {type: 'string'},
     adminIdList: {type: 'array', itemType: 'string'},
-    memberList: {
-      type: 'array', itemType: 'object', rule: {
-        id: {type: 'string'},
-        name: {type: 'string'},
-        avatar: {type: 'string'},
-        roomAlias: {type: 'string', required: false},
-        inviterId: {type: 'string', required: false}
-      }
-    },
+    memberIdList: {type: 'array', itemType: 'string'},
     avatar: {type: 'string', required: false},
     ownerId: {type: 'string', required: false},
   }));
   router.put('/room', async (ctx) => {
     const {request} = ctx;
-    const {memberList, ...data} = request.body;
-    // extract memberIdList
-    let memberIdList = await Aigle.map(memberList, async (member) => {
-      // set roomMemberPayload
-      await puppet.cacheRoomMemberPayload.set(member.id, member);
-      return member.id;
-    });
     // set cache
-    await puppet.cacheRoomPayload.set(data.id, Object.assign({memberIdList}, data));
+    await puppet.cacheRoomPayload.set(request.body.id, request.body);
+    // response
+    resultUtil.result(ctx, 200);
+  });
+
+  /**
+   * add | update room member
+   */
+  router.put('/room/member', parameterValidate({
+    id: {type: 'string'},
+    name: {type: 'string'},
+    avatar: {type: 'string'},
+    roomAlias: {type: 'string', required: false},
+    inviterId: {type: 'string', required: false}
+  }));
+  router.put('/room/member', async (ctx) => {
+    const {request} = ctx;
+    // set cache
+    await puppet.cacheRoomMemberPayload.set(request.body.id, request.body);
     // response
     resultUtil.result(ctx, 200);
   });
