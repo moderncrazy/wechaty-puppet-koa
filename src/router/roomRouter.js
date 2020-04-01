@@ -4,6 +4,8 @@
  * room router
  */
 
+const Aigle = require('aigle');
+
 const resultUtil = require('../util/resultUtil');
 const parameterValidate = require('../middleware/parameterValidate');
 
@@ -37,7 +39,7 @@ module.exports = async (router, puppet) => {
     const {request} = ctx;
     const {memberList, ...data} = request.body;
     // extract memberIdList
-    let memberIdList = memberList.map(async (member) => {
+    let memberIdList = await Aigle.map(memberList, async (member) => {
       member.id = `${data.id}_${member.id}`;
       // set roomMemberPayload
       await puppet.cacheRoomMemberPayload.set(member.id, member);
@@ -97,12 +99,12 @@ module.exports = async (router, puppet) => {
     // query room
     if (request.query.id) {
       result = await puppet.cacheRoomPayload.get(request.body.id);
-      result.memberList = result.memberIdList.map(async (memberId) => await puppet.cacheRoomMemberPayload.get(memberId));
+      result.memberList = await Aigle.map(result.memberIdList, async (memberId) => await puppet.cacheRoomMemberPayload.get(memberId));
       delete result.memberIdList;
     } else {
       for (let item of await puppet.cacheRoomPayload.values()) result.push(item);
-      result = result.map(async (room) => {
-        room.memberList = room.memberIdList.map(async (memberId) => await puppet.cacheRoomMemberPayload.get(memberId));
+      result = await Aigle.map(result, async (room) => {
+        room.memberList = await Aigle.map(room.memberIdList, async (memberId) => await puppet.cacheRoomMemberPayload.get(memberId));
         delete room.memberIdList;
         return room;
       });

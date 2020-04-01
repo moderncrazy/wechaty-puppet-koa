@@ -5,6 +5,7 @@
  */
 
 const fs = require('fs');
+const Aigle = require('aigle');
 
 module.exports = {
   /**
@@ -41,7 +42,7 @@ module.exports = {
     // import room
     for (let room of roomList) {
       // import roomMember
-      room.memberIdList = room.memberList.map(async (member) => {
+      room.memberIdList = await Aigle.map(room.memberList, async (member) => {
         member.id = `${room.id}_${member.id}`;
         await puppet.cacheRoomMemberPayload.set(member.id, member);
         return member.id;
