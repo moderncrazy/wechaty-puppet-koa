@@ -40,7 +40,6 @@ module.exports = async (router, puppet) => {
     const {memberList, ...data} = request.body;
     // extract memberIdList
     let memberIdList = await Aigle.map(memberList, async (member) => {
-      member.id = `${data.id}_${member.id}`;
       // set roomMemberPayload
       await puppet.cacheRoomMemberPayload.set(member.id, member);
       return member.id;
@@ -61,12 +60,6 @@ module.exports = async (router, puppet) => {
     const {request} = ctx;
     // delete cacheRoomPayload
     await puppet.cacheRoomPayload.delete(request.body.id);
-    // delete cacheRoomMemberPayload
-    for (const key of await puppet.cacheRoomMemberPayload.keys()) {
-      if (key.indexOf(request.body.id) == 0) {
-        await puppet.cacheRoomMemberPayload.delete(key)
-      }
-    }
     // response
     resultUtil.result(ctx, 200);
   });
@@ -75,14 +68,12 @@ module.exports = async (router, puppet) => {
    * delete room member
    */
   router.delete('/room/member', parameterValidate({
-    roomId: {type: 'string'},
-    memberId: {type: 'string'},
+    id: {type: 'string'},
   }));
   router.delete('/room/member', async (ctx) => {
     const {request} = ctx;
-    const {roomId, memberId} = request.body;
     // delete cache
-    await puppet.cacheRoomMemberPayload.delete(`${roomId}_${memberId}`);
+    await puppet.cacheRoomMemberPayload.delete(request.body.id);
     // response
     resultUtil.result(ctx, 200);
   });
