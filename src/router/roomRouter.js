@@ -132,20 +132,13 @@ module.exports = async (router, puppet) => {
    */
   router.post('/room/join', parameterValidate({
     id: {type: 'string'},
-    topic: {type: 'string'},
     inviterId: {type: 'string'},
-    adminIdList: {type: 'array', itemType: 'string'},
     inviteeIdList: {type: 'array', itemType: 'string'},
-    memberIdList: {type: 'array', itemType: 'string'},
-    avatar: {type: 'string', required: false},
-    ownerId: {type: 'string', required: false},
     timestamp: {type: 'number', required: false}
   }));
   router.post('/room/join', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
-    // set content
-    await puppet.cacheRoomPayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
     puppet.emit('room-join', data.id, data.inviteeIdList, data.inviterId, timestamp || Date.now());
     // response
     resultUtil.result(ctx, 200);
@@ -156,20 +149,13 @@ module.exports = async (router, puppet) => {
    */
   router.post('/room/leave', parameterValidate({
     id: {type: 'string'},
-    topic: {type: 'string'},
     removerId: {type: 'string'},
-    adminIdList: {type: 'array', itemType: 'string'},
     leaverIdList: {type: 'array', itemType: 'string'},
-    memberIdList: {type: 'array', itemType: 'string'},
-    avatar: {type: 'string', required: false},
-    ownerId: {type: 'string', required: false},
     timestamp: {type: 'number', required: false}
   }));
   router.post('/room/leave', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
-    // set content
-    await puppet.cacheRoomPayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
     puppet.emit('room-leave', data.id, data.leaverIdList, data.removerId, timestamp || Date.now());
     // response
     resultUtil.result(ctx, 200);
@@ -180,21 +166,14 @@ module.exports = async (router, puppet) => {
    */
   router.post('/room/topic', parameterValidate({
     id: {type: 'string'},
-    topic: {type: 'string'},
     newTopic: {type: 'string'},
     oldTopic: {type: 'string'},
     changerId: {type: 'string'},
-    adminIdList: {type: 'array', itemType: 'string'},
-    memberIdList: {type: 'array', itemType: 'string'},
-    avatar: {type: 'string', required: false},
-    ownerId: {type: 'string', required: false},
     timestamp: {type: 'number', required: false}
   }));
   router.post('/room/topic', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
-    // set content
-    await puppet.cacheRoomPayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
     puppet.emit('room-topic', data.id, data.newTopic, data.oldTopic, data.changerId, timestamp || Date.now());
     // response
     resultUtil.result(ctx, 200);
