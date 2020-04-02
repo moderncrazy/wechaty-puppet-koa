@@ -7,6 +7,7 @@
 const Aigle = require('aigle');
 
 const resultUtil = require('../util/resultUtil');
+const commonUtil = require('../util/commonUtil');
 const parameterValidate = require('../middleware/parameterValidate');
 
 /**
@@ -92,11 +93,11 @@ module.exports = async (router, puppet) => {
     let result = [];
     // query room
     if (request.query.id) {
-      result = await puppet.cacheRoomPayload.get(request.body.id);
+      result = commonUtil.copyByJson(await puppet.cacheRoomPayload.get(request.body.id));
       result.memberList = await Aigle.map(result.memberIdList, async (memberId) => await puppet.cacheRoomMemberPayload.get(memberId));
       delete result.memberIdList;
     } else {
-      for (let item of await puppet.cacheRoomPayload.values()) result.push(item);
+      for (let item of await puppet.cacheRoomPayload.values()) result.push(commonUtil.copyByJson(item));
       result = await Aigle.map(result, async (room) => {
         room.memberList = await Aigle.map(room.memberIdList, async (memberId) => await puppet.cacheRoomMemberPayload.get(memberId));
         delete room.memberIdList;
