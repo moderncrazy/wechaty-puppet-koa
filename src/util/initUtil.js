@@ -41,7 +41,12 @@ module.exports = {
   async importRoomMember(roomMemberList, puppet) {
     // import roomMember
     for (let roomMember of roomMemberList) {
-      await puppet.cacheRoomMemberPayload.set(roomMember.id, roomMember);
+      // extract the corresponding contact
+      let contact = (await puppet.cacheContactPayload.get(roomMember.id)) || {};
+      await puppet.cacheRoomMemberPayload.set(roomMember.id, Object.assign({
+        name: contact.name || 'mock_name',
+        avatar: contact.avatar || 'https://avatars0.githubusercontent.com/u/21285357?s=200&v=4'
+      }, roomMember));
     }
   },
 

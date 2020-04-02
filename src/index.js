@@ -35,6 +35,8 @@ class PuppetKoa extends PuppetMock {
       this.loginData = Object.assign(this.loginData, data.login);
     }
 
+    this.id = this.loginData.id;
+
     this.emit('scan', this.loginData.qrcode, this.loginData.status, this.loginData.data);
 
     this.emit('login', this.loginData.id);

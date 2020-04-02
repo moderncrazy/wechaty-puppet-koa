@@ -50,6 +50,11 @@ const bot = new Wechaty({name: config.botName, puppet});
 
 **initFile.json**
 
+- `login` configuration is required.
+- the configuration of `login` and `contact` is consistent with the parameters of `create contact ([PUT] /mock/contact)` interface
+- people in `roomMemberList` are better existing in the `contactList`
+- the configuration of `room` is consistent with the parameters of `create room ([PUT] /mock/room)` interface
+
 ```json
 {
   "login": {
@@ -84,10 +89,9 @@ const bot = new Wechaty({name: config.botName, puppet});
   ],
   "roomMemberList": [
     {
-      "id": "member_1",
-      "roomAlias": "member_1_alias",
-      "avatar": "https://avatars0.githubusercontent.com/u/21285357?s=200&v=4",
-      "name": "member_1_name"
+      "id": "friend_1",
+      "roomAlias": "friend_1_alias",
+      "inviterId": "bot_id"
     }
   ],
   "roomList": [
@@ -95,12 +99,13 @@ const bot = new Wechaty({name: config.botName, puppet});
       "id": "room_1",
       "topic": "room_topic",
       "avatar": "https://avatars0.githubusercontent.com/u/21285357?s=200&v=4",
-      "ownerId": "member_1",
+      "ownerId": "bot_id",
       "adminIdList": [
-        "member_1"
+        "bot_id"
       ],
       "memberIdList": [
-        "member_1"
+        "bot_id",
+        "friend_1"
       ]
     }
   ]
