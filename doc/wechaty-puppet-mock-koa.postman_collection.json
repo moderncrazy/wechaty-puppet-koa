@@ -1,0 +1,484 @@
+{
+	"info": {
+		"_postman_id": "3d9b10ab-4bf9-4cdf-9acd-df279fd9dbbc",
+		"name": "wechaty-puppet-mock-koa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CONTACT",
+			"description": "",
+			"item": [
+				{
+					"name": "QUERY_CONTACT",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/mock/contact?",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"mock",
+								"contact"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "bot_id",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_UPDATE_CONTACT",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"test_1\",\n\t\"name\": \"test_1_name\",\n\t\"avatar\": \"test_1_avatar\",\n\t\"type\": 1,\n\t\"gender\": 1,\n\t\"city\": \"beijin\",\n\t\"alias\": \"test_1_name\",\n\t\"star\": false,\n\t\"weixin\": \"weixin\",\n\t\"friend\": false,\n\t\"address\": \"beijin\",\n\t\"province\": \"beijin\"\n}"
+						},
+						"url": "{{url}}/mock/contact"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_CONTACT",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"test_1\"\n}"
+						},
+						"url": "{{url}}/mock/contact"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MESSAGE",
+			"description": "",
+			"item": [
+				{
+					"name": "ROOM_MESSAGE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"message_room_1\",\n\t\"roomId\": \"room_1\",\n\t\"mentionIdList\": [\"bot_id\"],\n\t\"type\": 7,\n\t\"text\": \"hello\",\n\t\"toId\": \"bot_id\",\n\t\"fromId\": \"friend_1\",\n\t\"filename\": \"/path/test.json\"\n}"
+						},
+						"url": "{{url}}/mock/message/room"
+					},
+					"response": []
+				},
+				{
+					"name": "SINGLE_MESSAGE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"message_single_1\",\n\t\"type\": 7,\n\t\"text\": \"hello\",\n\t\"toId\": \"bot_id\",\n\t\"fromId\": \"friend_1\",\n\t\"filename\": \"/path/test.json\"\n}"
+						},
+						"url": "{{url}}/mock/message/single"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ROOM",
+			"description": "",
+			"item": [
+				{
+					"name": "QUERY_ROOM",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/mock/room?",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"mock",
+								"room"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "bot_id",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QUERY_ROOM_MEMBER",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/mock/room/member?",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"mock",
+								"room",
+								"member"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "bot_id",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_UPDATE_ROOM",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"test_room_1\",\n\t\"topic\": \"test_room_1\",\n\t\"adminIdList\": [\"member_1\"],\n\t\"memberIdList\": [\"member_1\"],\n\t\"avatar\": \"https://avatars0.githubusercontent.com/u/21285357?s=200&v=4\",\n\t\"ownerId\": \"member_1\"\n}"
+						},
+						"url": "{{url}}/mock/room"
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_UPDATE_ROOM_MEMBER",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"test_member_1\",\n\t\"name\": \"test_member_1_name\",\n\t\"avatar\": \"https://avatars0.githubusercontent.com/u/21285357?s=200&v=4\",\n\t\"roomAlias\": \"test_member_1_alias\",\n\t\"inviterId\": \"member_1\"\n}"
+						},
+						"url": "{{url}}/mock/room/member"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_ROOM",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"test_room_1\"\n}"
+						},
+						"url": "{{url}}/mock/room"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_ROOM_MEMBER",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"test_member_1\"\n}"
+						},
+						"url": "{{url}}/mock/room/member"
+					},
+					"response": []
+				},
+				{
+					"name": "JOIN_ROOM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"test_room_1\",\n\t\"inviterId\": \"bot_id\",\n\t\"inviteeIdList\": [\"bot_id\"]\n}"
+						},
+						"url": "{{url}}/mock/room/join"
+					},
+					"response": []
+				},
+				{
+					"name": "LEAVE_ROOM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"room_1\",\n\t\"removerId\": \"bot_id\",\n\t\"leaverIdList\": [\"bot_id\"]\n}"
+						},
+						"url": "{{url}}/mock/room/leave"
+					},
+					"response": []
+				},
+				{
+					"name": "TOPIC_ROOM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"room_1\",\n\t\"newTopic\": \"room_1_test\",\n\t\"oldTopic\": \"room_1\",\n\t\"changerId\": \"bot_id\"\n}"
+						},
+						"url": "{{url}}/mock/room/topic"
+					},
+					"response": []
+				},
+				{
+					"name": "INVITE_ROOM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"room_1\",\n\t\"topic\": \"room_topic\",\n\t\"avatar\": \"https://avatars0.githubusercontent.com/u/21285357?s=200&v=4\",\n\t\"inviterId\": \"bot_id\",\n\t\"invitation\": \"invitation\",\n\t\"receiverId\": \"friend_1\",\n\t\"memberCount\": 1,\n\t\"memberIdList\": [\"friend_1\"]\n}"
+						},
+						"url": "{{url}}/mock/room/invite"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FRIENDSHIP",
+			"description": "",
+			"item": [
+				{
+					"name": "CONFIRM_FRIENDSHIP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"friendship_confirm_1\",\n\t\"contactId\": \"friend_1\",\n\t\"hello\": \"hello\"\n}"
+						},
+						"url": "{{url}}/mock/friendship/confirm"
+					},
+					"response": []
+				},
+				{
+					"name": "RECEIVE_FRIENDSHIP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"friendship_receive_1\",\n\t\"ticket\": \"ticket\",\n\t\"contactId\": \"friend_1\",\n\t\"hello\": \"hello\",\n\t\"stranger\": \"stranger\",\n\t\"scene\": 3\n}"
+						},
+						"url": "{{url}}/mock/friendship/receive"
+					},
+					"response": []
+				},
+				{
+					"name": "VERIFY_FRIENDSHIP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"friendship_confirm_1\",\n\t\"contactId\": \"friend_1\",\n\t\"hello\": \"hello\"\n}"
+						},
+						"url": "{{url}}/mock/friendship/verify"
+					},
+					"response": []
+				},
+				{
+					"name": "UNKNOWN_FRIENDSHIP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"friendship_confirm_1\",\n\t\"contactId\": \"friend_1\",\n\t\"hello\": \"hello\"\n}"
+						},
+						"url": "{{url}}/mock/friendship/unknown"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ROOT",
+			"description": "",
+			"item": [
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"test_1\",\n\t\"name\": \"test_1_name\",\n\t\"avatar\": \"test_1_avatar\",\n\t\"type\": 1,\n\t\"gender\": 1,\n\t\"city\": \"beijin\",\n\t\"alias\": \"test_1_name\",\n\t\"star\": false,\n\t\"weixin\": \"weixin\",\n\t\"friend\": false,\n\t\"address\": \"beijin\",\n\t\"province\": \"beijin\"\n}"
+						},
+						"url": "{{url}}/mock/login"
+					},
+					"response": []
+				},
+				{
+					"name": "LOGOUT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"test_1\",\n\t\"name\": \"test_1_name\",\n\t\"avatar\": \"test_1_avatar\",\n\t\"reason\": \"logout\",\n\t\"type\": 1,\n\t\"gender\": 1,\n\t\"city\": \"beijin\",\n\t\"alias\": \"test_1_name\",\n\t\"star\": false,\n\t\"weixin\": \"weixin\",\n\t\"friend\": false,\n\t\"address\": \"beijin\",\n\t\"province\": \"beijin\"\n}"
+						},
+						"url": "{{url}}/mock/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "RESET",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"reason\": \"reset\"\n}"
+						},
+						"url": "{{url}}/mock/reset"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

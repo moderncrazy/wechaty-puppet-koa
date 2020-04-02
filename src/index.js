@@ -23,6 +23,18 @@ class PuppetKoa extends PuppetMock {
     this.port = port || 3000;
     this.prefix = prefix || '/mock';
     this.loginData = loginData || {id: 'bot_id', status: 0, qrcode: 'https://not-exist.com'};
+
+    const app = new Koa();
+
+    app.use(notFound());
+
+    app.use(bodyParser());
+
+    router(app, this).then(() => {
+      app.listen(this.port, () => {
+        console.log(`PuppetKoa listen http://0.0.0.0:${this.port}`);
+      });
+    });
   }
 
   async start() {
@@ -40,18 +52,6 @@ class PuppetKoa extends PuppetMock {
     this.emit('scan', this.loginData.qrcode, this.loginData.status, this.loginData.data);
 
     this.emit('login', this.loginData.id);
-
-    const app = new Koa();
-
-    app.use(notFound());
-
-    app.use(bodyParser());
-
-    await router(app, this);
-
-    app.listen(this.port, () => {
-      console.log(`PuppetKoa listen http://0.0.0.0:${this.port}`);
-    })
   }
 }
 

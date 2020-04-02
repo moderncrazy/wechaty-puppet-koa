@@ -1,0 +1,73 @@
+{
+  "login": {
+    "id": "bot_id",
+    "name": "bot_name",
+    "avatar": "https://avatars0.githubusercontent.com/u/21285357?s=200&v=4",
+    "type": 1,
+    "gender": 1,
+    "city": "shanghai",
+    "alias": "bot_alias",
+    "star": false,
+    "weixin": "weixin",
+    "friend": true,
+    "address": "shanghai",
+    "province": "shanghai"
+  },
+  "contactList": [
+    {
+      "id": "friend_1",
+      "name": "friend_1_name",
+      "avatar": "https://avatars0.githubusercontent.com/u/21285357?s=200&v=4",
+      "type": 1,
+      "gender": 1,
+      "city": "shanghai",
+      "alias": "friend_1_alias",
+      "star": false,
+      "weixin": "weixin",
+      "friend": true,
+      "address": "shanghai",
+      "province": "shanghai"
+    },
+    {
+      "id": "friend_2",
+      "name": "friend_2_name",
+      "avatar": "https://avatars0.githubusercontent.com/u/21285357?s=200&v=4",
+      "type": 1,
+      "gender": 2,
+      "city": "shanghai",
+      "alias": "friend_2_alias",
+      "star": true,
+      "weixin": "weixin",
+      "friend": true,
+      "address": "shanghai",
+      "province": "shanghai"
+    }
+  ],
+  "roomMemberList": [
+    {
+      "id": "friend_1",
+      "roomAlias": "friend_1_alias"
+    },
+    {
+      "id": "friend_2",
+      "roomAlias": "friend_2_alias",
+      "inviterId": "friend_1"
+    }
+  ],
+  "roomList": [
+    {
+      "id": "room_1",
+      "topic": "room_topic",
+      "avatar": "https://avatars0.githubusercontent.com/u/21285357?s=200&v=4",
+      "ownerId": "friend_1",
+      "adminIdList": [
+        "friend_1",
+        "friend_2"
+      ],
+      "memberIdList": [
+        "friend_1",
+        "friend_2"
+      ]
+    }
+  ]
+}

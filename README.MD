@@ -46,6 +46,13 @@ if (process.env.NODE_ENV != 'dev') {
 const bot = new Wechaty({name: config.botName, puppet});
 
 ...
+
+// receive message
+bot.on('message', async (msg) => {
+  console.log(msg.from().name(),msg.text());
+});
+
+...
 ```
 
 **initFile.json**
@@ -56,6 +63,7 @@ const bot = new Wechaty({name: config.botName, puppet});
 - the configuration of `room` is consistent with the parameters of `create room ([PUT] /mock/room)` interface
 
 ```json
+// /doc/mock.json
 {
   "login": {
     "id": "bot_id",
@@ -111,4 +119,36 @@ const bot = new Wechaty({name: config.botName, puppet});
   ]
 }
 ```
+
+**API sample**
+
+- send message
+
+  ```shell
+  // request
+  curl -X POST \
+    http://localhost:3000/mock/message/single \
+    -H 'Cache-Control: no-cache' \
+    -H 'Content-Type: application/json' \
+    -H 'Postman-Token: f7f34936-8a75-41f3-b008-7c48992bceca' \
+    -d '{
+  	"id": "message_single_1",
+  	"type": 7,
+  	"text": "hello",
+  	"toId": "bot_id",
+  	"fromId": "friend_1",
+  	"filename": "/path/test.json"
+  }'
+  
+  // response
+  {"state":200,"message":"Request success!"}
+  
+  // console
+  friend_1_name hello
+  ```
+
+**Reference resources**
+
+- API Specification：**/doc/api_specification.md**
+- Postman Script: **/doc/wechaty-puppet-mock-koa.postman_collection.json**
 
