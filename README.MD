@@ -80,8 +80,15 @@ const bot = new Wechaty({name: config.botName, puppet});
       "friend": true,
       "address": "shanghai",
       "province": "shanghai"
-    },
-    ...
+    }
+  ],
+  "roomMemberList": [
+    {
+      "id": "member_1",
+      "roomAlias": "member_1_alias",
+      "avatar": "https://avatars0.githubusercontent.com/u/21285357?s=200&v=4",
+      "name": "member_1_name"
+    }
   ],
   "roomList": [
     {
@@ -90,20 +97,12 @@ const bot = new Wechaty({name: config.botName, puppet});
       "avatar": "https://avatars0.githubusercontent.com/u/21285357?s=200&v=4",
       "ownerId": "member_1",
       "adminIdList": [
-        "member_1",
-        "member_2"
+        "member_1"
       ],
-      "memberList": [
-        {
-          "id": "member_1",
-          "roomAlias": "member_1_alias",
-          "avatar": "https://avatars0.githubusercontent.com/u/21285357?s=200&v=4",
-          "name": "member_1_name"
-        },
-        ...
+      "memberIdList": [
+        "member_1"
       ]
-    },
-    ...
+    }
   ]
 }
 ```

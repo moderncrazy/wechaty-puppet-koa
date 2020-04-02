@@ -5,7 +5,6 @@
  */
 
 const fs = require('fs');
-const Aigle = require('aigle');
 
 module.exports = {
   /**
@@ -17,6 +16,7 @@ module.exports = {
     const data = JSON.parse(fs.readFileSync(file, {encoding: 'utf8'}));
     await this.importContact([data.login], puppet);
     await this.importContact(data.contactList, puppet);
+    await this.importRoomMember(data.roomMemberList, puppet);
     await this.importRoom(data.roomList, puppet);
     return data;
   },
@@ -35,18 +35,24 @@ module.exports = {
 
   /**
    * import room
+   * @param roomMemberList {Array}
+   * @param puppet
+   */
+  async importRoomMember(roomMemberList, puppet) {
+    // import roomMember
+    for (let roomMember of roomMemberList) {
+      await puppet.cacheRoomMemberPayload.set(roomMember.id, roomMember);
+    }
+  },
+
+  /**
+   * import room
    * @param roomList {Array}
    * @param puppet
    */
   async importRoom(roomList, puppet) {
     // import room
     for (let room of roomList) {
-      // import roomMember
-      room.memberIdList = await Aigle.map(room.memberList, async (member) => {
-        await puppet.cacheRoomMemberPayload.set(member.id, member);
-        return member.id;
-      });
-      delete room.memberList;
       await puppet.cacheRoomPayload.set(room.id, room);
     }
   },
