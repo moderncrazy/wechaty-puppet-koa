@@ -1,6 +1,6 @@
 {
   "name": "wechaty-puppet-mock-koa",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "It is convenient to test wechaty with restful interface",
   "main": "src/index.js",
   "scripts": {},
@@ -12,8 +12,8 @@
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "parameter": "^3.6.0",
-    "wechaty-puppet": "^0.20.2",
-    "wechaty-puppet-mock": "^0.16.1"
+    "wechaty-puppet": "^0.30.5",
+    "wechaty-puppet-mock": "^0.22.41"
   },
   "devDependencies": {
     "eslint": "^6.8.0"
