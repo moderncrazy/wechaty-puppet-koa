@@ -43,17 +43,6 @@
       "province": "shanghai"
     }
   ],
-  "roomMemberList": [
-    {
-      "id": "friend_1",
-      "roomAlias": "friend_1_alias"
-    },
-    {
-      "id": "friend_2",
-      "roomAlias": "friend_2_alias",
-      "inviterId": "friend_1"
-    }
-  ],
   "roomList": [
     {
       "id": "room_1",
