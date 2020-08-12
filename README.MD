@@ -152,6 +152,5 @@ bot.on('message', async (msg) => {
 - API Specification：**/doc/api_specification.md**
 - Postman Script: **/doc/wechaty-puppet-mock-koa.postman_collection.json**
 
-### v0.1.1
- - upgrade wechaty-puppet 0.30.5
- - upgrade wechaty-puppet-mock 0.22.41
+### Note
+ - Run with wechaty 0.46.x+
