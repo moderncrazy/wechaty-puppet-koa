@@ -132,7 +132,6 @@ bot.on('message', async (msg) => {
     -H 'Content-Type: application/json' \
     -H 'Postman-Token: f7f34936-8a75-41f3-b008-7c48992bceca' \
     -d '{
-  	"id": "message_single_1",
   	"type": 7,
   	"text": "hello",
   	"toId": "bot_id",

@@ -18,7 +18,6 @@ module.exports = async (router, puppet) => {
    * send message by room
    */
   router.post('/message/room', parameterValidate({
-    id: {type: 'string'},
     roomId: {type: 'string'},
     mentionIdList: {type: 'array', itemType: 'string'},
     type: {type: 'enum', values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]},
@@ -32,7 +31,8 @@ module.exports = async (router, puppet) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
-    puppet.mocker.MockMessage.create(Object.assign({timestamp: timestamp || Date.now()}, data))
+    data.id = `msg_id_${Math.random()}`;
+    puppet.mocker.MockMessage.create(Object.assign({timestamp: timestamp || Date.now()}, data));
     puppet.emit('message', {messageId: data.id});
     // response
     resultUtil.result(ctx, 200);
@@ -42,7 +42,6 @@ module.exports = async (router, puppet) => {
    * send message by single
    */
   router.post('/message/single', parameterValidate({
-    id: {type: 'string'},
     toId: {type: 'string'},
     fromId: {type: 'string'},
     type: {type: 'enum', values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]},
@@ -54,6 +53,7 @@ module.exports = async (router, puppet) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
+    data.id = `msg_id_${Math.random()}`;
     puppet.mocker.MockMessage.create(Object.assign({timestamp: timestamp || Date.now()}, data))
     puppet.emit('message', {messageId: data.id});
     // response

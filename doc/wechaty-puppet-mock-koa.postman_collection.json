@@ -97,7 +97,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": \"message_room_1\",\n\t\"roomId\": \"room_1\",\n\t\"mentionIdList\": [\"bot_id\"],\n\t\"type\": 7,\n\t\"text\": \"hello\",\n\t\"toId\": \"bot_id\",\n\t\"fromId\": \"friend_1\",\n\t\"filename\": \"/path/test.json\"\n}"
+							"raw": "{\n\t\"roomId\": \"room_1\",\n\t\"mentionIdList\": [\"bot_id\"],\n\t\"type\": 7,\n\t\"text\": \"hello\",\n\t\"toId\": \"bot_id\",\n\t\"fromId\": \"friend_1\",\n\t\"filename\": \"/path/test.json\"\n}"
 						},
 						"url": "{{url}}/mock/message/room"
 					},
@@ -115,7 +115,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": \"message_single_1\",\n\t\"type\": 7,\n\t\"text\": \"hello\",\n\t\"toId\": \"bot_id\",\n\t\"fromId\": \"friend_1\",\n\t\"filename\": \"/path/test.json\"\n}"
+							"raw": "{\n\t\"type\": 7,\n\t\"text\": \"hello\",\n\t\"toId\": \"bot_id\",\n\t\"fromId\": \"friend_1\",\n\t\"filename\": \"/path/test.json\"\n}"
 						},
 						"url": "{{url}}/mock/message/single"
 					},
