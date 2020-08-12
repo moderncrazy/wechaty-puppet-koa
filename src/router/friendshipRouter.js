@@ -33,7 +33,7 @@ module.exports = async (router, puppet) => {
       timestamp: timestamp || Date.now(),
       type: FriendshipType.Confirm
     }, data));
-    puppet.emit('friendship', data.id);
+    puppet.emit('friendship', {friendshipId: data.id});
     // response
     resultUtil.result(ctx, 200);
   });
@@ -58,7 +58,7 @@ module.exports = async (router, puppet) => {
       timestamp: timestamp || Date.now(),
       type: FriendshipType.Receive
     }, data));
-    puppet.emit('friendship', data.id);
+    puppet.emit('friendship', {friendshipId: data.id});
     // response
     resultUtil.result(ctx, 200);
   });
@@ -80,7 +80,7 @@ module.exports = async (router, puppet) => {
       timestamp: timestamp || Date.now(),
       type: FriendshipType.Verify
     }, data));
-    puppet.emit('friendship', data.id);
+    puppet.emit('friendship', {friendshipId: data.id});
     // response
     resultUtil.result(ctx, 200);
   });
@@ -102,7 +102,7 @@ module.exports = async (router, puppet) => {
       timestamp: timestamp || Date.now(),
       type: FriendshipType.Unknown
     }, data));
-    puppet.emit('friendship', data.id);
+    puppet.emit('friendship', {friendshipId: data.id});
     // response
     resultUtil.result(ctx, 200);
   });

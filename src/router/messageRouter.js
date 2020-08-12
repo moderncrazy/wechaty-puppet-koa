@@ -10,7 +10,7 @@ const parameterValidate = require('../middleware/parameterValidate');
 /**
  * message router
  * @param router
- * @param puppet
+ * @param puppet {PuppetMock}
  */
 module.exports = async (router, puppet) => {
 
@@ -32,8 +32,8 @@ module.exports = async (router, puppet) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
-    await puppet.cacheMessagePayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
-    puppet.emit('message', data.id);
+    puppet.mocker.MockMessage.create(Object.assign({timestamp: timestamp || Date.now()}, data))
+    puppet.emit('message', {messageId: data.id});
     // response
     resultUtil.result(ctx, 200);
   });
@@ -54,8 +54,8 @@ module.exports = async (router, puppet) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
     // set content
-    await puppet.cacheMessagePayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
-    puppet.emit('message', data.id);
+    puppet.mocker.MockMessage.create(Object.assign({timestamp: timestamp || Date.now()}, data))
+    puppet.emit('message', {messageId: data.id});
     // response
     resultUtil.result(ctx, 200);
   });

@@ -35,7 +35,7 @@ module.exports = async (router, puppet) => {
     const {request} = ctx;
     // set content
     await puppet.cacheContactPayload.set(request.body.id, request.body);
-    puppet.emit('login', request.body.id);
+    puppet.emit('login', {contactId: request.body.id});
     // response
     resultUtil.result(ctx, 200);
   });
@@ -63,7 +63,10 @@ module.exports = async (router, puppet) => {
     const {reason} = request.body;
     // set content
     await puppet.cacheContactPayload.set(request.body.id, request.body);
-    puppet.emit('logout', request.body.id, reason);
+    puppet.emit('logout', {
+      contactId: request.body.id,
+      data: reason,
+    });
     // response
     resultUtil.result(ctx, 200);
   });
@@ -77,7 +80,7 @@ module.exports = async (router, puppet) => {
   router.post('/reset', (ctx) => {
     const {request} = ctx;
     const {reason} = request.body;
-    puppet.emit('reset', reason);
+    puppet.emit('reset', {data: reason});
     // response
     resultUtil.result(ctx, 200);
   });

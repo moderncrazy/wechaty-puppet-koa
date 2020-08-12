@@ -49,9 +49,15 @@ class PuppetKoa extends PuppetMock {
 
     this.id = this.loginData.id;
 
-    this.emit('scan', this.loginData.qrcode, this.loginData.status, this.loginData.data);
+    // EventScanPayload
+    this.emit('scan', {
+      status: this.loginData.status,
+      qrcode: this.loginData.qrcode,
+      data: this.loginData.data
+    });
 
-    this.emit('login', this.loginData);
+    // EventLoginPayload
+    this.emit('login', {contactId: this.loginData.id});
   }
 }
 

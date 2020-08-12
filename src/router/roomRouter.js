@@ -139,7 +139,13 @@ module.exports = async (router, puppet) => {
   router.post('/room/join', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
-    puppet.emit('room-join', data.id, data.inviteeIdList, data.inviterId, timestamp || Date.now());
+    // EventRoomJoinPayload
+    puppet.emit('room-join', {
+      roomId: data.id,
+      inviterId: data.inviterId,
+      inviteeIdList: data.inviteeIdList,
+      timestamp: timestamp || Date.now()
+    });
     // response
     resultUtil.result(ctx, 200);
   });
@@ -156,7 +162,13 @@ module.exports = async (router, puppet) => {
   router.post('/room/leave', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
-    puppet.emit('room-leave', data.id, data.leaverIdList, data.removerId, timestamp || Date.now());
+    // EventRoomLeavePayload
+    puppet.emit('room-leave', {
+      removeeIdList: data.leaverIdList,
+      removerId: data.removerId,
+      roomId: data.id,
+      timestamp: timestamp || Date.now()
+    });
     // response
     resultUtil.result(ctx, 200);
   });
@@ -174,7 +186,14 @@ module.exports = async (router, puppet) => {
   router.post('/room/topic', async (ctx) => {
     const {request} = ctx;
     const {timestamp, ...data} = request.body;
-    puppet.emit('room-topic', data.id, data.newTopic, data.oldTopic, data.changerId, timestamp || Date.now());
+    // EventRoomTopicPayload
+    puppet.emit('room-topic', {
+      changerId: data.changerId,
+      newTopic: data.newTopic,
+      oldTopic: data.oldTopic,
+      roomId: data.id,
+      timestamp: timestamp || Date.now(),
+    });
     // response
     resultUtil.result(ctx, 200);
   });
@@ -198,7 +217,7 @@ module.exports = async (router, puppet) => {
     const {timestamp, ...data} = request.body;
     // set content
     await puppet.cacheRoomInvitationPayload.set(data.id, Object.assign({timestamp: timestamp || Date.now()}, data));
-    puppet.emit('room-invite', data.id);
+    puppet.emit('room-invite', {roomInvitationId: data.id});
     // response
     resultUtil.result(ctx, 200);
   });
