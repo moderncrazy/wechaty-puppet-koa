@@ -29,7 +29,6 @@ $ npm install wechaty-puppet-mock-koa --save-dev
 **index.js**
 
 ```javascript
-const {PuppetKoa} = require('wechaty-puppet-mock-koa');
 const {PuppetPadplus} = require('wechaty-puppet-padplus');
 
 let puppet = null;
@@ -39,6 +38,7 @@ if (process.env.NODE_ENV != 'dev') {
   puppet = new PuppetPadplus({token: 'xxx'});
 } else {
   // use mock puppet
+  const {PuppetKoa} = require('wechaty-puppet-mock-koa');
   puppet = new PuppetKoa({port:3001,prefix:'/api',initFile:'./initFile.json'});
 }
 

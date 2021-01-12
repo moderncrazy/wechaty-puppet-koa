@@ -11,7 +11,7 @@ import router from './router/router';
 import initUtil from './util/initUtil';
 import notFound from './middleware/notFound';
 
-class PuppetKoa extends PuppetMock {
+export class PuppetKoa extends PuppetMock {
   private readonly port: number;
   private readonly prefix: string;
   private readonly initFile: string;
@@ -67,5 +67,3 @@ class PuppetKoa extends PuppetMock {
     this.mocker.login(this.mocker.ContactMock.load(this.loginData.id));
   }
 }
-
-export default PuppetKoa;
