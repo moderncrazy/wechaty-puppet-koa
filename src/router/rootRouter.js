@@ -1,87 +1,85 @@
+"use strict";
 /**
  * Create by geekeryoung on 2020/3/30
  *
  * system router
  */
-
-const resultUtil = require('../util/resultUtil');
-const parameterValidate = require('../middleware/parameterValidate');
-
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const resultUtil_1 = tslib_1.__importDefault(require("../util/resultUtil"));
+const parameterValidate_1 = tslib_1.__importDefault(require("../middleware/parameterValidate"));
 /**
  * system router
- * @param router
- * @param puppet
  */
-module.exports = async (router, puppet) => {
-
-  /**
-   * login
-   */
-  router.post('/login', parameterValidate({
-    id: {type: 'string'},
-    name: {type: 'string'},
-    avatar: {type: 'string'},
-    type: {type: 'enum', values: [0, 1, 2]},
-    gender: {type: 'enum', values: [0, 1, 2]},
-    city: {type: 'string', required: false},
-    alias: {type: 'string', required: false},
-    star: {type: 'boolean', required: false},
-    weixin: {type: 'string', required: false},
-    friend: {type: 'boolean', required: false},
-    address: {type: 'string', required: false},
-    province: {type: 'string', required: false},
-  }));
-  router.post('/login', async (ctx) => {
-    const {request} = ctx;
-    // set content
-    await puppet.cacheContactPayload.set(request.body.id, request.body);
-    puppet.emit('login', {contactId: request.body.id});
-    // response
-    resultUtil.result(ctx, 200);
-  });
-
-  /**
-   * logout
-   */
-  router.post('/logout', parameterValidate({
-    id: {type: 'string'},
-    name: {type: 'string'},
-    avatar: {type: 'string'},
-    reason: {type: 'string'},
-    type: {type: 'enum', values: [0, 1, 2]},
-    gender: {type: 'enum', values: [0, 1, 2]},
-    city: {type: 'string', required: false},
-    alias: {type: 'string', required: false},
-    star: {type: 'boolean', required: false},
-    weixin: {type: 'string', required: false},
-    friend: {type: 'boolean', required: false},
-    address: {type: 'string', required: false},
-    province: {type: 'string', required: false},
-  }));
-  router.post('/logout', async (ctx) => {
-    const {request} = ctx;
-    const {reason} = request.body;
-    // set content
-    await puppet.cacheContactPayload.set(request.body.id, request.body);
-    puppet.emit('logout', {
-      contactId: request.body.id,
-      data: reason,
+exports.default = async (router, puppet) => {
+    /**
+     * login
+     */
+    router.post('/login', parameterValidate_1.default({
+        id: { type: 'string' },
+        name: { type: 'string' },
+        avatar: { type: 'string' },
+        type: { type: 'enum', values: [0, 1, 2] },
+        gender: { type: 'enum', values: [0, 1, 2] },
+        city: { type: 'string', required: false },
+        alias: { type: 'string', required: false },
+        star: { type: 'boolean', required: false },
+        weixin: { type: 'string', required: false },
+        friend: { type: 'boolean', required: false },
+        address: { type: 'string', required: false },
+        province: { type: 'string', required: false },
+    }));
+    router.post('/login', async (ctx) => {
+        const { request } = ctx;
+        // set content
+        let contact = await puppet.mocker.createContact(request.body);
+        await puppet.mocker.login(contact);
+        puppet.emit('login', { contactId: request.body.id });
+        // response
+        resultUtil_1.default.result(ctx, 200);
     });
-    // response
-    resultUtil.result(ctx, 200);
-  });
-
-  /**
-   * reset
-   */
-  router.post('/reset', parameterValidate({
-    reason: {type: 'string'}
-  }));
-  router.post('/reset', (ctx) => {
-    const {request} = ctx;
-    const {reason} = request.body;
-    puppet.emit('reset', {data: reason});
-    // response
-    resultUtil.result(ctx, 200);
-  });
+    /**
+     * logout
+     */
+    router.post('/logout', parameterValidate_1.default({
+        id: { type: 'string' },
+        name: { type: 'string' },
+        avatar: { type: 'string' },
+        reason: { type: 'string' },
+        type: { type: 'enum', values: [0, 1, 2] },
+        gender: { type: 'enum', values: [0, 1, 2] },
+        city: { type: 'string', required: false },
+        alias: { type: 'string', required: false },
+        star: { type: 'boolean', required: false },
+        weixin: { type: 'string', required: false },
+        friend: { type: 'boolean', required: false },
+        address: { type: 'string', required: false },
+        province: { type: 'string', required: false },
+    }));
+    router.post('/logout', async (ctx) => {
+        const { request } = ctx;
+        const { reason } = request.body;
+        // set content
+        await puppet.mocker.createContact(request.body);
+        puppet.emit('logout', {
+            contactId: request.body.id,
+            data: reason,
+        });
+        // response
+        resultUtil_1.default.result(ctx, 200);
+    });
+    /**
+     * reset
+     */
+    router.post('/reset', parameterValidate_1.default({
+        reason: { type: 'string' }
+    }));
+    router.post('/reset', ctx => {
+        const { request } = ctx;
+        const { reason } = request.body;
+        puppet.emit('reset', { data: reason });
+        // response
+        resultUtil_1.default.result(ctx, 200);
+    });
 };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm9vdFJvdXRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJvb3RSb3V0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBOzs7O0dBSUc7OztBQUtILDRFQUE0QztBQUM1QyxnR0FBZ0U7QUFFaEU7O0dBRUc7QUFDSCxrQkFBZSxLQUFLLEVBQUUsTUFBYyxFQUFFLE1BQWtCLEVBQUUsRUFBRTtJQUUxRDs7T0FFRztJQUNILE1BQU0sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFLDJCQUFpQixDQUFDO1FBQ3RDLEVBQUUsRUFBRSxFQUFDLElBQUksRUFBRSxRQUFRLEVBQUM7UUFDcEIsSUFBSSxFQUFFLEVBQUMsSUFBSSxFQUFFLFFBQVEsRUFBQztRQUN0QixNQUFNLEVBQUUsRUFBQyxJQUFJLEVBQUUsUUFBUSxFQUFDO1FBQ3hCLElBQUksRUFBRSxFQUFDLElBQUksRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsRUFBQztRQUN2QyxNQUFNLEVBQUUsRUFBQyxJQUFJLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUM7UUFDekMsSUFBSSxFQUFFLEVBQUMsSUFBSSxFQUFFLFFBQVEsRUFBRSxRQUFRLEVBQUUsS0FBSyxFQUFDO1FBQ3ZDLEtBQUssRUFBRSxFQUFDLElBQUksRUFBRSxRQUFRLEVBQUUsUUFBUSxFQUFFLEtBQUssRUFBQztRQUN4QyxJQUFJLEVBQUUsRUFBQyxJQUFJLEVBQUUsU0FBUyxFQUFFLFFBQVEsRUFBRSxLQUFLLEVBQUM7UUFDeEMsTUFBTSxFQUFFLEVBQUMsSUFBSSxFQUFFLFFBQVEsRUFBRSxRQUFRLEVBQUUsS0FBSyxFQUFDO1FBQ3pDLE1BQU0sRUFBRSxFQUFDLElBQUksRUFBRSxTQUFTLEVBQUUsUUFBUSxFQUFFLEtBQUssRUFBQztRQUMxQyxPQUFPLEVBQUUsRUFBQyxJQUFJLEVB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
