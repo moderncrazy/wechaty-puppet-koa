@@ -40,6 +40,6 @@
   },
   "typings": "src/index.ts",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/"
   }
 }
